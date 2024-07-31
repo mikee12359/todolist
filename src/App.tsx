@@ -4,32 +4,58 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState('');
+
+  const addTodo = () => {
+    if (newTodo.trim() === '') return;
+    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+    setNewTodo('');
+  };
+
+  const toggleTodo = (id: any) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <h1>TODO List</h1>
+      <div className="todo-input">
+        <input
+          type="text"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          placeholder="Add a new todo"
+        />
+        <button onClick={addTodo}>Add</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className="todo-list">
+        {todos.map((todo) => (
+          <div key={todo.id} className="todo-item">
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodo(todo.id)}
+            />
+            <span
+              style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+            >
+              {todo.text}
+            </span>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+          </div>
+        ))}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;

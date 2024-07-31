@@ -40,3 +40,52 @@
 .read-the-docs {
   color: #888;
 }
+
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.todo-input {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.todo-input input {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.todo-input button {
+  padding: 8px 16px;
+  margin-left: 8px;
+  font-size: 16px;
+}
+
+.todo-list {
+  margin-top: 20px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.todo-item input {
+  margin-right: 8px;
+}
+
+.todo-item button {
+  margin-left: 8px;
+  padding: 4px 8px;
+  font-size: 14px;
+}
